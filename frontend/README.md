@@ -1,44 +1,70 @@
-# To-do with React
+# Task Manager - Frontend
 
-This project was made in React during a challenge called "5 Projetos em 5 Dias" by [B7Web](https://b7web.com.br).
+## 📊 Visão Geral
+Este é o frontend da aplicação **Task Manager**, desenvolvido com **React e TypeScript**. Ele permite aos usuários gerenciar tarefas, incluindo criação, edição, listagem e exclusão de tarefas.
 
-## First Steps
+## 🚀 Tecnologias Utilizadas
+- **Linguagem**: TypeScript
+- **Framework**: React
+- **Gerenciamento de Estado**: Context API
+- **Estilização**: Styled Components / CSS Modules
+- **Requisições HTTP**: Axios
 
-`npm install`
+---
 
-## Available Scripts
+## 🛠️ Como Executar o Frontend
 
-In the project directory, you can run:
+### 🔧 Pré-requisitos
+Certifique-se de ter instalados em sua máquina:
+- [Node.js](https://nodejs.org/) 
 
-### `npm start`
+### 🛋️ Clonando o Repositório
+```sh
+git clone https://github.com/LopesEduarda/Task-Manager.git
+cd task-manager/frontend
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🌐 Rodando Localmente
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Instale as dependências:
+```sh
+Ou npm install
+```
+2. Inicie o servidor de desenvolvimento:
+```sh
+Ou npm start
+```
+Acesse no navegador:
+```
+http://localhost:3000
+```
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔍 Funcionalidades
+- Criar novas tarefas com título e descrição.
+- Listar todas as tarefas.
+- Atualizar o status das tarefas.
+- Editar uma tarefa existente.
+- Deletar uma tarefa.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📊 Estrutura do Projeto
+```
+frontend/
+│-- src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── styles/
+│   ├── App.tsx
+│   ├── index.tsx
+│-- public/
+│-- package.json
+│-- tsconfig.json
+│-- README.md
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
