@@ -28,7 +28,7 @@ cd task-manager/frontend
 
 1. Instale as dependências:
 ```sh
-Ou npm install
+npm install
 ```
 2. Inicie o servidor de desenvolvimento:
 ```sh
