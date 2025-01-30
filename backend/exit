@@ -1,0 +1,5 @@
+ installed_rank | version |     description     | type |                    script                    |  checksum   | installed_by |        installed_on        | execution_time | success 
+----------------+---------+---------------------+------+----------------------------------------------+-------------+--------------+----------------------------+----------------+---------
+              1 | 1.0.0   | create tarefa table | SQL  | db/migration/V1.0.0__create_tarefa_table.sql | -1864259357 | postgres     | 2025-01-29 16:16:22.783645 |             60 | t
+(1 row)
+
