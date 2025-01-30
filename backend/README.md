@@ -1,78 +1,112 @@
-# gerenciador-tarefas
+# Testes do Backend - Task Manager
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## 📊 Visão Geral
+Este documento detalha os testes automatizados do backend da aplicação **Task Manager**, implementados utilizando **JUnit** e **RestAssured** para validar o funcionamento da API RESTful.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Os testes são executados dentro do ambiente **QuarkusTest**, garantindo que os endpoints funcionem conforme esperado.
 
-## Running the application in dev mode
+---
 
-You can run your application in dev mode that enables live coding using:
+## 🔍 Como Rodar os Testes
 
-```shell script
-./mvnw quarkus:dev
+Os testes devem ser executados dentro do container Docker do backend.
+
+### **1️⃣ Subir os containers**
+```sh
+docker-compose up -d --build
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+### **2️⃣ Acessar o container do backend**
+```sh
+docker exec -it quarkus_dev /bin/sh
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+### **3️⃣ Executar os testes**
+```sh
+mvn test
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
+Para rodar um teste específico:
+```sh
+mvn -Dtest=TarefaResourceTest test
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+---
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+## 🔮 Descrição dos Testes
 
-You can then execute your native executable with: `./target/gerenciador-tarefas-1.0.0-SNAPSHOT-runner`
+A classe `TarefaResourceTest.java` contém os seguintes testes:
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+### 1️⃣ **Criar uma Nova Tarefa**
+**Método:** `testCriarTarefa`
 
-## Related Guides
+- Envia um **POST** para `/tarefas` com uma nova tarefa.
+- Verifica se o status da resposta é `201 CREATED`.
+- Extrai o ID da nova tarefa criada e o armazena para testes futuros.
+- **Erro esperado:** Nenhum.
 
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and more
+### 2️⃣ **Listar Todas as Tarefas**
+**Método:** `testListarTarefas`
 
-## Provided Code
+- Envia um **GET** para `/tarefas`.
+- Verifica se o status da resposta é `200 OK`.
+- Verifica que a lista de tarefas retornadas **não está vazia**.
 
-### Hibernate ORM
+### 3️⃣ **Buscar uma Tarefa por ID**
+**Método:** `testBuscarTarefaPorId`
 
-Create your first JPA entity
+- Envia um **GET** para `/tarefas/{id}`.
+- Verifica se o status da resposta é `200 OK`.
+- Valida que os dados retornados correspondem à tarefa criada.
 
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+### 4️⃣ **Atualizar uma Tarefa Existente**
+**Método:** `testAtualizarTarefa`
 
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+- Envia um **PUT** para `/tarefas/{id}` com novos valores.
+- Verifica se o status da resposta é `200 OK`.
+- Confirma que os dados foram atualizados corretamente.
 
+### 5️⃣ **Marcar uma Tarefa como Pendente**
+**Método:** `testMarcarTarefaComoPendente`
 
-### RESTEasy JAX-RS
+- Altera uma tarefa concluída de volta para **pendente**.
+- Verifica que o campo `status` é atualizado corretamente.
 
-Easily start your RESTful Web Services
+### 6️⃣ **Deletar uma Tarefa**
+**Método:** `testDeletarTarefa`
 
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+- Envia um **DELETE** para `/tarefas/{id}`.
+- Verifica se o status da resposta é `200 OK`.
+- Confirma que a resposta retorna "Tarefa excluída com sucesso!".
+
+### 7️⃣ **Verificar que a Tarefa Foi Deletada**
+**Método:** `testTarefaNaoEncontradaAposDelecao`
+
+- Tenta buscar a tarefa deletada enviando um **GET** para `/tarefas/{id}`.
+- Verifica se o status da resposta é `404 NOT FOUND`.
+
+### 8️⃣ **Criar uma Tarefa Sem Título (Erro Esperado)**
+**Método:** `testCriarTarefaSemTitulo`
+
+- Envia um **POST** para `/tarefas` sem o campo `titulo`.
+- Verifica se o status da resposta é `400 BAD REQUEST`.
+- Confirma que a resposta retorna "Erro: O título da tarefa é obrigatório.".
+
+### 9️⃣ **Criar uma Tarefa Sem Descrição (Erro Esperado)**
+**Método:** `testCriarTarefaSemDescricao`
+
+- Envia um **POST** para `/tarefas` sem o campo `descricao`.
+- Verifica se o status da resposta é `400 BAD REQUEST`.
+- Confirma que a resposta retorna "Erro: A descrição da tarefa é obrigatória.".
+
+### 🔟 **Listagem de Tarefas Ordenada por Data de Criação**
+**Método:** `testListagemOrdenadaPorDataCriacao`
+
+- Envia um **GET** para `/tarefas`.
+- Verifica se o status da resposta é `200 OK`.
+- Confirma que a lista está ordenada pela **data de criação** (tarefas mais recentes primeiro).
+
+---
+
+## 🎉 Conclusão
+Este conjunto de testes garante que a API **Task Manager** funciona corretamente para criar, atualizar, listar e deletar tarefas, além de validar erros esperados. 
