@@ -120,7 +120,7 @@ npm install
 ```
 3. Inicie o servidor de desenvolvimento:
 ```sh
-npm start
+npm run start
 ```
 Isso abrirá automaticamente o navegador em `http://localhost:3000`.
 
