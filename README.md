@@ -80,7 +80,7 @@ Os endpoints da API ficam acessíveis através da porta `8081`.
 {
   "titulo": "Nova Tarefa",
   "descricao": "Descrição da tarefa",
-  "status": "PENDENTE"
+  "concluida": "false"   
 }
 ```
 
@@ -93,7 +93,7 @@ Os endpoints da API ficam acessíveis através da porta `8081`.
 {
   "titulo": "Tarefa Atualizada",
   "descricao": "Nova descrição",
-  "status": "CONCLUIDA"
+  "concluida": "true"
 }
 ```
 
