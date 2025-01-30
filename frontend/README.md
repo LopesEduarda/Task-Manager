@@ -67,4 +67,19 @@ frontend/
 │-- README.md
 ```
 
+---
+
+
+## 🎨 Capturas de Tela
+
+
+![image](https://github.com/user-attachments/assets/85a9ff45-85ff-408e-af34-9e82dda5bc82)
+
+
+
+
+
+
+
+
 
