@@ -50,7 +50,7 @@ docker-compose up -d --build
 ```
 
 ### **2️⃣ Acessar o container do backend**
-Para executar os testes dentro do container, primeiro acesse o terminal do backend:
+Para executar os testes dentro do container, primeiro acesse o terminal do back-end:
 ```sh
 docker ps  # Para encontrar o container
 docker exec -it quarkus_dev /bin/sh
